@@ -1,0 +1,5 @@
+def k
+def cardPoints
+for int(input()):
+        score = cardPoints in range[k]
+        final_score = sum(score)
