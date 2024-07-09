@@ -1,7 +1,41 @@
-def number_of_letters
-def numbers
-numbers = range[1:1001]
-for numbers:
-				number_of_letters = len(str(numbers))			
-for total_number_of_letters:
-				sum(number_of_letters in range[1:1001])
+def number_to_words(n):
+    """
+    Convert a number into words.
+    """
+    if n == 0:
+        return 'zero'
+
+    units = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    teens = ["", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+    tens = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+    thousands = ["", "thousand"]
+
+    if n < 10:
+        return units[n]
+    elif 10 < n < 20:
+        return teens[n-10]
+    elif n == 10 or n % 10 == 0 and n < 100:
+        return tens[n//10]
+    elif n < 100:
+        return tens[n//10] + units[n%10]
+    elif n % 100 == 0 and n < 1000:
+        return units[n//100] + 'hundred'
+    elif n < 1000:
+        return units[n//100] + 'hundredand' + number_to_words(n%100)
+    else:
+        return units[n//1000] + 'thousand'
+
+def count_letters_in_words():
+    """
+    Count the total number of letters from 1 to 1000 when written in words.
+    """
+    total_letters = 0
+
+    for i in range(1, 1001):
+        words = number_to_words(i)
+        total_letters += len(words.replace(' ', '').replace('-', ''))
+
+    return total_letters
+
+# Execute the function and print the result
+print(count_letters_in_words())
